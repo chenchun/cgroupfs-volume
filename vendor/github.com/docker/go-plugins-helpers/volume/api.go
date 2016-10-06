@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/docker/go-plugins-helpers/sdk"
+	"fmt"
 )
 
 const (
@@ -128,9 +129,9 @@ func (h *Handler) handle(name string, actionCall actionHandler) {
 		if err := sdk.DecodeRequest(w, r, &req); err != nil {
 			return
 		}
-
+		fmt.Printf("%s %v\n", name, req)
 		res := actionCall(req)
-
+		fmt.Printf("%s %v\n", name, res)
 		sdk.EncodeResponse(w, res, res.Err)
 	})
 }
@@ -141,8 +142,9 @@ func (h *Handler) handleMount(name string, actionCall mountActionHandler) {
 		if err := sdk.DecodeRequest(w, r, &req); err != nil {
 			return
 		}
-
+		fmt.Printf("%s %v\n", name, req)
 		res := actionCall(req)
+		fmt.Printf("%s %v\n", name, res)
 		sdk.EncodeResponse(w, res, res.Err)
 	})
 }
@@ -153,8 +155,9 @@ func (h *Handler) handleUnmount(name string, actionCall unmountActionHandler) {
 		if err := sdk.DecodeRequest(w, r, &req); err != nil {
 			return
 		}
-
+		fmt.Printf("%s %v\n", name, req)
 		res := actionCall(req)
+		fmt.Printf("%s %v\n", name, res)
 		sdk.EncodeResponse(w, res, res.Err)
 	})
 }
